@@ -1,0 +1,92 @@
+{% extends 'app/base/base_main.html' %}
+{% load static %}
+{% block extraCSS %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'app/cart/css/cart.css' %}">
+{% endblock %}
+{% block extraJS %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'app/cart/js/cart.js' %}"></script>
+{% endblock %}
+{% block content %}
+
+    <div id="cart">
+        <h3>购物车</h3>
+        <ul class="full">
+            <section>
+                <ul>
+                    <li>
+                        <div class="clear">
+                            <p class="infoJustify">收货人<b></b></p>
+                            <p>:<span>Rock</span></p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="clear">
+                            <p class="infoJustify">电话:<b></b></p>
+                            <p>:110<span><a class="change">修改></a></span></p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="clear">
+                            <p class="infoJustify">收货地址<b></b></p>
+                            <p>:<span>宝盛里</span></p>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="bill">
+                    <p>闪送超市</p>
+                    <p>¥0起送,22:00前满¥30免运费</p>
+                    <a>凑单专区</a>
+                </div>
+
+                <div class="delivery">
+                    <span>收货时间</span>
+                    <span>一小时送达</span>
+                    <a href="">可预订&gt;</a>
+                    <p><span>收货备注</span> <input type="text"></p>
+                </div>
+
+
+                {#                商品列表#}
+                <ul>
+                    {% for goodsinfo in goodsList %}
+                        <li class="menuList" cartid="{{ goodsinfo.id }}">
+                            <div class="confirm">
+                                <span class="ischoose">
+                                    {% if goodsinfo.c_select %}
+                                        <span class="select_status">√</span>
+                                    {% else %}
+                                        <span class="select_status" style="display: none">√</span>
+                                    {% endif %}
+                                </span>
+
+                            </div>
+                            <a href="">
+                                <img src="{{ goodsinfo.c_goods.productimg }}" alt="图片未加载成功">
+                                <p>{{ goodsinfo.c_goods.productname }}</p>
+                                <span>￥{{ goodsinfo.c_goods.price }}</span>
+                            </a>
+
+                            <section>
+                                <button class="subgoods">-</button>
+                                <span>{{ goodsinfo.c_num }}</span>
+                                <button class="addgoods">+</button>
+                            </section>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+
+                <div class="payTheBill">
+                    <div class="confirm"><span><span class="all_select" style="display: none">√</span></span></div>
+                    <p><span>全选</span><span>总计</span><span> 总价</span></p>
+                    <span class="generate_order">下单</span>
+                </div>
+            </section>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

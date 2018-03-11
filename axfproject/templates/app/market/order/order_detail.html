@@ -1,0 +1,35 @@
+{% extends 'app/base/base_order.html' %}
+{% load static %}
+
+{% block extraCSS %}
+{{ block.super }}
+    <link rel="stylesheet" href="{% static 'app/market/css/order_detail.css' %}">
+{% endblock %}
+
+{% block extraJS %}
+{{ block.super }}
+    <script type="text/javascript" src="{% static 'app/cart/js/order_detail.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div id="order_detail" class="container">
+    <h2>用户：{{ user.u_name }}</h2>
+        <ul>
+           {% for goodsinfo in goodsinfos %}
+           <li>
+
+            <h4>{{ goodsinfo.c_goods.productlongname }}</h4>
+           </li>
+           {% endfor %}
+
+
+
+        </ul>
+        <button orderid="{{ goodsinfos.0.c_order.id }}" class="btn btn-block btn-danger btn-default"id="alipay">支付</button>
+    </div>
+
+
+
+
+{% endblock %}
